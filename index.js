@@ -1,3 +1,4 @@
+var hasProp = Object.prototype.hasOwnProperty;
 
 function each (collection, iteratee, thisArg) {
     if (collection) {
@@ -10,7 +11,7 @@ function each (collection, iteratee, thisArg) {
 
         } else {
             for (var prop in collection) {
-                if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+                if (hasProp.call(collection, prop)) {
                     if (iteratee.call(thisArg, collection[prop], prop, collection) === false) {
                         return;
                     }
