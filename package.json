@@ -1,6 +1,6 @@
 {
   "name": "seebigs-each",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Safely iterate over each item in an Object or Array",
   "main": "index.js",
   "scripts": {
