@@ -18,7 +18,10 @@ function shouldEqual (actual, expected, desc) {
 
 var allPassed = true;
 var arr = [1, 2, 3];
-var obj = { abc: 123, def: 456 };
+var inherited = { xyz: 890 };
+var obj = Object.create(inherited);
+obj.abc = 123;
+obj.def = 456;
 
 describe("when given undefined does not call the callback", function(desc) {
     each(void 0, function () {
@@ -68,7 +71,7 @@ describe("when given an arguments object iterates the arguments", function(desc)
     shouldEqual(actual[1].val, 'arg2', desc);
 });
 
-describe("when given an object iterates the object", function(desc) {
+describe("when given an object iterates the object's own properties", function(desc) {
     var actual = [],
         expected = [
             { key: 'abc', val: 123, col: obj },
@@ -77,6 +80,7 @@ describe("when given an object iterates the object", function(desc) {
     each(obj, function(v, k, c) {
         actual.push({ key: k, val: v, col: c });
     });
+    shouldEqual(obj.xyz, 890, desc);
     shouldEqual(actual.length, expected.length, desc);
     shouldEqual(actual[1].key, 'def', desc);
     shouldEqual(actual[1].val, 456, desc);
@@ -107,4 +111,7 @@ describe("when an iteratee returns false drops out of the loop", function(desc) 
 
 if (allPassed) {
     console.log('\nAll Passed!\n');
+} else {
+    console.log('\nFAIL\n');
+    process.exit(1);
 }
